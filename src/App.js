@@ -81,7 +81,7 @@ function App() {
 
         <div>
             <p>Nombre de jours : {getSavedDiet().length}</p>
-            <p>Dernière date renseignée : {new Date(getNearestDate()).toLocaleDateString("fr")}</p>
+            <p>Date la plus proche renseignée : {new Date(getNearestDate()).toLocaleDateString("fr")}</p>
         </div>
     </div>
   );
