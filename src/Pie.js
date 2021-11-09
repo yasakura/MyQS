@@ -78,21 +78,25 @@ const Pie = () => {
                 <label>
                     Date{" "}
                     <input type="date" name="date" id="date"/>
-                </label><br/><br/>
-                <label>
-                    Végétarien
+                </label><br/><br/><br/>
+                <div style={{display: "flex", alignItems: "center", justifyContent: "space-evenly"}}>
+                    <label style={{border: "solid 1px black", height: "100px", borderRadius: "5px", padding: "5px", width: "90px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+                        Végétarien <br/>
 
-                    <input type="radio" name="diet" value="vegetarian"/>
-                </label><br/><br/>
-                <label>
-                    Végan
-                    <input type="radio" name="diet" value="vegan"/>
-                </label><br/><br/>
-                <label>
-                    Omnivore
-                    <input type="radio" name="diet" value="omnivore"/>
-                </label><br/><br/>
-                <button type="submit">Enregistrer</button>
+                        <input type="radio" name="diet" value="vegetarian"/>
+                    </label><br/><br/>
+                    <label style={{border: "solid 1px black", height: "100px", borderRadius: "5px", padding: "5px", width: "90px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+                        Végan <br/>
+                        <input type="radio" name="diet" value="vegan"/>
+                    </label><br/><br/>
+                    <label style={{border: "solid 1px black", height: "100px", borderRadius: "5px", padding: "5px", width: "90px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+                        Omnivore <br/>
+                        <input type="radio" name="diet" value="omnivore"/>
+                    </label>
+                </div>
+
+                <br/><br/>
+                <button type="submit" style={{padding: "10px 15px"}}>Enregistrer</button>
             </form>
 
             <div>
