@@ -9,7 +9,17 @@ function App() {
       const diet = event.target.diet.value;
       const savedDiet = getSavedDiet();
       const dietEntry = {date, diet};
-      let dietEntryToSave = [...savedDiet, dietEntry]
+      const dateFilter = (diet) => diet.date === date
+      const currentDateInSavedDiet = savedDiet.filter(dateFilter)
+      const currentDateIndexInSavedDiet = savedDiet.findIndex(dateFilter)
+      const isCurrentDateInSavedDiet = currentDateInSavedDiet.length > 0;
+      let dietEntryToSave = [...savedDiet]
+
+      if(isCurrentDateInSavedDiet){
+          dietEntryToSave.splice(currentDateIndexInSavedDiet, 1)
+      }
+
+      dietEntryToSave = [...dietEntryToSave, dietEntry]
 
       localStorage.setItem("diet", JSON.stringify(dietEntryToSave))
   }
