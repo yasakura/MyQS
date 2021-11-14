@@ -6,7 +6,7 @@ function App() {
 
   
   return (
-    <div className="App">
+    <div className="App" style={{maxWidth: "375px", margin: "0 auto"}}>
       <header style={{margin: "20px 0"}}>My QS</header>
             <Pie />
     </div>

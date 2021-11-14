@@ -23,9 +23,10 @@ const Pie = () => {
         event.preventDefault()
         const date = event.target.date.value;
         const diet = event.target.diet.value;
+        const meal = event.target.meal.value;
         const savedDiet = diets;
-        const dietEntry = {date, diet};
-        const dateFilter = (diet) => diet.date === date
+        const dietEntry = {date, diet, meal};
+        const dateFilter = (diet) => diet.date === date && diet.meal === meal
         const currentDateInSavedDiet = savedDiet.filter(dateFilter)
         const currentDateIndexInSavedDiet = savedDiet.findIndex(dateFilter)
         const isCurrentDateInSavedDiet = currentDateInSavedDiet.length > 0;
@@ -57,6 +58,24 @@ const Pie = () => {
         return sortedByDiff[0];
     }
 
+    const labelStyle = {
+        border: "solid 1px black",
+        height: "100px",
+        borderRadius: "5px",
+        padding: "5px",
+        width: "100px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column"
+    }
+
+    const lunchLabelStyle = {
+        ...labelStyle,
+        width: "65px",
+        height: "65px"
+    }
+
     return (
         <>
             <div style={{width: "70%", height: "300px", margin: "0 auto 30px"}}>
@@ -77,19 +96,37 @@ const Pie = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Date{" "}
-                    <input type="date" name="date" id="date"/>
+                    <input type="date" name="date" id="date" required/>
                 </label><br/><br/><br/>
-                <div style={{display: "flex", alignItems: "center", justifyContent: "space-evenly"}}>
-                    <label style={{border: "solid 1px black", height: "100px", borderRadius: "5px", padding: "5px", width: "90px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
-                        Végétarien <br/>
-
-                        <input type="radio" name="diet" value="vegetarian"/>
+                <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "40px"}}>
+                    <label style={lunchLabelStyle}>
+                        Matin <br/>
+                        <input type="radio" name="meal" value="breakfast" required/>
                     </label><br/><br/>
-                    <label style={{border: "solid 1px black", height: "100px", borderRadius: "5px", padding: "5px", width: "90px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+                    <label style={lunchLabelStyle}>
+                        Midi <br/>
+                        <input type="radio" name="meal" value="lunch"/>
+                    </label><br/><br/>
+                    <label style={lunchLabelStyle}>
+                        Goûter <br/>
+                        <input type="radio" name="meal" value="snack"/>
+                    </label><br/><br/>
+                    <label style={lunchLabelStyle}>
+                        Soir <br/>
+                        <input type="radio" name="meal" value="dinner"/>
+                    </label>
+                </div>
+
+                <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+                    <label style={labelStyle}>
+                        Végétarien <br/>
+                        <input type="radio" name="diet" value="vegetarian" required/>
+                    </label><br/><br/>
+                    <label style={labelStyle}>
                         Végan <br/>
                         <input type="radio" name="diet" value="vegan"/>
                     </label><br/><br/>
-                    <label style={{border: "solid 1px black", height: "100px", borderRadius: "5px", padding: "5px", width: "90px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+                    <label style={labelStyle}>
                         Omnivore <br/>
                         <input type="radio" name="diet" value="omnivore"/>
                     </label>
