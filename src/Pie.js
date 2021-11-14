@@ -6,6 +6,17 @@ const Pie = () => {
 
     const [diets, setDiets] = useState(getSavedDiet());
 
+    const getDietNumber = () => {
+        const dietDates = diets.reduce((previousValue, currentValue) => {
+            previousValue.push(currentValue.date)
+            return previousValue
+        }, [])
+
+        const dietDatesWithoutDuplicateDates = dietDates.filter((item, index) => dietDates.indexOf(item) === index)
+
+        return dietDatesWithoutDuplicateDates.length
+    }
+
     const getData = () => {
         const savedDiet = diets;
         const veganDiet = savedDiet.filter((diet) => diet.diet === "vegan")
@@ -137,7 +148,7 @@ const Pie = () => {
             </form>
 
             <div>
-                <p>Nombre de jours : {diets.length}</p>
+                <p>Nombre de jours : {getDietNumber()}</p>
                 <p>Date la plus proche renseignée : {new Date(getNearestDate()).toLocaleDateString("fr")}</p>
             </div>
         </>
