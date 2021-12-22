@@ -32,7 +32,7 @@ function App() {
         className="App"
         style={{ maxWidth: "375px", margin: "0 auto", padding: "0 10px" }}
       >
-        <header style={{ margin: "20px 0" }}>My QS</header>
+        <header style={{ margin: "20px 0" }}>{process.env.REACT_APP_WEBSITE_NAME}</header>
         <Loading />
       </div>
     );
@@ -43,7 +43,7 @@ function App() {
       className="App"
       style={{ maxWidth: "375px", margin: "0 auto", padding: "0 10px" }}
     >
-      <header style={{ margin: "20px 0" }}>My QS</header>
+      <header style={{ margin: "20px 0" }}>{process.env.REACT_APP_WEBSITE_NAME}</header>
       {!user ? <Login /> : <Pie />}
     </div>
   );
