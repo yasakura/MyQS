@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, set } from "firebase/database";
-import { auth, database, logout } from "./libs/firebase";
 import { useObjectVal } from "react-firebase-hooks/database";
+import { auth, database, logout } from "./libs/firebase";
 import Loading from "./components/loading";
 
 const Pie = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const userId = user?.uid;
-  const [snapshot, loadingDatabase, errorDatabase] = useObjectVal(
+  const [snapshot, loadingDatabase] = useObjectVal(
     ref(database, `users/${userId}`)
   );
   const diets = snapshot || [];
@@ -53,7 +53,7 @@ const Pie = () => {
     const meal = event.target.meal.value;
     const savedDiet = diets;
     const dietEntry = { date, diet, meal };
-    const dateFilter = (diet) => diet.date === date && diet.meal === meal;
+    const dateFilter = () => diet.date === date && diet.meal === meal;
     const currentDateInSavedDiet = savedDiet.filter(dateFilter);
     const currentDateIndexInSavedDiet = savedDiet.findIndex(dateFilter);
     const isCurrentDateInSavedDiet = currentDateInSavedDiet.length > 0;
@@ -78,9 +78,9 @@ const Pie = () => {
   const getNearestDate = () => {
     const today = new Date();
     const dates = getDatesFromSavedDiet();
-    const sortedByDiff = [...dates].sort((a, b) => {
-      return Math.abs(new Date(a) - today) - Math.abs(new Date(b) - today);
-    });
+    const sortedByDiff = [...dates].sort(
+      (a, b) => Math.abs(new Date(a) - today) - Math.abs(new Date(b) - today)
+    );
 
     return sortedByDiff[0];
   };
@@ -140,7 +140,8 @@ const Pie = () => {
 
       <form onSubmit={handleSubmit}>
         <label>
-          Date <input type="date" name="date" id="date" required />
+          Date
+          <input type="date" name="date" id="date" required />
         </label>
         <br />
         <br />
@@ -218,7 +219,7 @@ const Pie = () => {
       {user && (
         <div>
           <p>Utilisateur: {user.email}</p>
-          <button onClick={logout}>Se déconnecter</button>
+          <button onClick={logout} type="submit">Se déconnecter</button>
         </div>
       )}
 

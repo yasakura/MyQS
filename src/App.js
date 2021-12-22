@@ -1,12 +1,13 @@
 // import logo from './logo.svg';
 import "./App.css";
-import Pie from "./Pie";
+import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./libs/firebase";
 import Login from "./components/login";
-import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import Loading from "./components/loading";
+import Pie from "./Pie";
+import handleError from "./utils/error";
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -18,14 +19,11 @@ function App() {
     }
 
     signInWithEmailLink(auth, email, window.location.href)
-      .then((result) => {
+      .then(() => {
         window.localStorage.removeItem("emailForSignIn");
         window.location.search = "";
       })
-      .catch((error) => {
-        console.error("errorCode", error.code);
-        console.error("errorMessage", error.message);
-      });
+      .catch(handleError);
   }
 
   if (loading) {

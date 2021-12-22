@@ -1,7 +1,8 @@
 import React from "react";
 import { sendSignInLinkToEmail } from "firebase/auth";
-import { auth } from "../libs/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../libs/firebase";
+import handleError from "../utils/error";
 
 const Login = () => {
   const [loading] = useAuthState(auth);
@@ -17,11 +18,7 @@ const Login = () => {
         window.localStorage.setItem("emailForSignIn", email);
         alert("Tu vas recevoir un mail pour te connecter 💌");
       })
-      .catch((error) => {
-        alert("Une erreur est survenue, recommence 😜");
-        console.error("errorCode", error?.code);
-        console.error("errorMessage", error?.message);
-      });
+      .catch(handleError);
   };
 
   const handleSubmit = (event) => {
@@ -33,7 +30,7 @@ const Login = () => {
   return (
     <div
       style={{
-        height: "calc(100vh - 100px)",
+        height: "calc(100vh - 200px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -57,7 +54,7 @@ const Login = () => {
           </label>
           <br />
           <br />
-          <button>Recevoir le lien de connexion</button>
+          <button type="button">Recevoir le lien de connexion</button>
         </form>
       )}
     </div>
