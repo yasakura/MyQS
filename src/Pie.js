@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import { ref, set } from "firebase/database";
+import {auth, database, logout} from "./libs/firebase";
+import {useObjectVal} from "react-firebase-hooks/database";
+import Loading from "./components/loading";
 
 const Pie = () => {
-    const getSavedDiet = () => JSON.parse(localStorage.getItem("diet")) || [];
-
-    const [diets, setDiets] = useState(getSavedDiet());
+    const [user, loading, error] = useAuthState(auth);
+    const userId = user?.uid;
+    const [snapshot, loadingDatabase, errorDatabase] = useObjectVal(ref(database, `users/${userId}`));
+    const diets = snapshot || [];
 
     const getDietNumber = () => {
         const dietDates = diets.reduce((previousValue, currentValue) => {
@@ -30,6 +36,10 @@ const Pie = () => {
         ]
     }
 
+    const writeUserData = (data) => {
+        set(ref(database, `users/${userId}`), data)
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault()
         const date = event.target.date.value;
@@ -50,7 +60,7 @@ const Pie = () => {
         dietEntryToSave = [...dietEntryToSave, dietEntry]
 
         localStorage.setItem("diet", JSON.stringify(dietEntryToSave))
-        setDiets(dietEntryToSave);
+        writeUserData(dietEntryToSave)
     }
 
     const getDatesFromSavedDiet = () => diets.reduce(
@@ -66,6 +76,7 @@ const Pie = () => {
         const sortedByDiff = [...dates].sort((a,b) => {
             return Math.abs(new Date(a) - today) - Math.abs(new Date(b) - today);
         })
+
         return sortedByDiff[0];
     }
 
@@ -87,12 +98,20 @@ const Pie = () => {
         height: "65px"
     }
 
+    const nearestDate = getNearestDate() ? new Date(getNearestDate()).toLocaleDateString("fr") : "Aucune 🤷‍";
+
+    if(loadingDatabase) {
+        return (
+            <Loading />
+        )
+    }
+
     return (
         <>
             <div style={{width: "70%", height: "300px", margin: "0 auto 30px"}}>
                 {diets.length === 0
                     ? <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
-                        <p>Remplissez le formulaire ;)</p><
+                        <p>Remplis le formulaire 😉</p><
                       /div>
                     :  <PieChart
                         data={getData()}
@@ -149,8 +168,19 @@ const Pie = () => {
 
             <div>
                 <p>Nombre de jours : {getDietNumber()}</p>
-                <p>Date la plus proche renseignée : {new Date(getNearestDate()).toLocaleDateString("fr")}</p>
+                <p>Date la plus proche renseignée : {nearestDate}</p>
             </div>
+
+            <hr />
+            {user &&(
+                <div>
+                <p>Utilisateur: {user.email}</p>
+                <button onClick={logout}>Se déconnecter</button>
+                </div>
+            )}
+
+            <hr />
+            <br/>
         </>
     );
 };
