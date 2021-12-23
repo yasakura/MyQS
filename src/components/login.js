@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { sendSignInLinkToEmail } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Button from "@mui/material/Button";
 import { auth } from "../libs/firebase";
 import handleError from "../utils/error";
 import Loading from "./loading";
-import Button from "@mui/material/Button";
 
 const Login = () => {
   const [loading] = useAuthState(auth);
@@ -58,7 +58,7 @@ const Login = () => {
           </label>
           <br />
           <br />
-          <Button type="submit" disabled={isButtonDisabled}>
+          <Button type="submit" variant="contained" disabled={isButtonDisabled}>
             {!isButtonDisabled
               ? "Recevoir le lien de connexion"
               : "Patiente un peu 🚀"}

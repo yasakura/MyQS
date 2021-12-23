@@ -3,6 +3,7 @@ import { PieChart } from "react-minimal-pie-chart";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, set } from "firebase/database";
 import { useObjectVal } from "react-firebase-hooks/database";
+import Button from "@mui/material/Button";
 import { auth, database, logout } from "./libs/firebase";
 import Loading from "./components/loading";
 
@@ -13,6 +14,8 @@ const Pie = () => {
     ref(database, `users/${userId}`)
   );
   const diets = snapshot || [];
+  // console.log("diets from server", diets)
+
 
   const getDietNumber = () => {
     const dietDates = diets.reduce((previousValue, currentValue) => {
@@ -201,9 +204,9 @@ const Pie = () => {
 
         <br />
         <br />
-        <button type="submit" style={{ padding: "10px 15px" }}>
+        <Button type="submit" variant="contained">
           Enregistrer
-        </button>
+        </Button>
       </form>
 
       <div>
@@ -215,9 +218,9 @@ const Pie = () => {
       {user && (
         <div>
           <p>Utilisateur: {user.email}</p>
-          <button onClick={logout} type="submit">
+          <Button onClick={logout} type="submit" variant="outlined">
             Se déconnecter
-          </button>
+          </Button>
         </div>
       )}
 
