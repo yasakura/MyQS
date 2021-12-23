@@ -28,7 +28,6 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submit form");
     const email = event?.target?.elements?.email?.value;
     login(email);
   };

@@ -1,4 +1,6 @@
+import "../css/loader.css";
 import React from "react";
+import Box from "@mui/material/Box";
 
 const Loading = () => (
   <div
@@ -9,7 +11,16 @@ const Loading = () => (
       justifyContent: "center",
     }}
   >
-    <p>Initialisation de l&apos;Application...</p>
+    <div className="loading">
+      <Box component="p">Patiente pendant que la magie opère ✨</Box>
+      <span />
+      <span />
+      <span />
+      <span />
+      <span />
+      <span />
+      <span />
+    </div>
   </div>
 );
 

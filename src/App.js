@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import "./App.css";
+import "./css/App.css";
 import React from "react";
 import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
