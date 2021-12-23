@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../libs/firebase";
 import handleError from "../utils/error";
 import Loading from "./loading";
+import Button from "@mui/material/Button";
 
 const Login = () => {
   const [loading] = useAuthState(auth);
@@ -57,11 +58,11 @@ const Login = () => {
           </label>
           <br />
           <br />
-          <button type="submit" disabled={isButtonDisabled}>
+          <Button type="submit" disabled={isButtonDisabled}>
             {!isButtonDisabled
               ? "Recevoir le lien de connexion"
               : "Patiente un peu 🚀"}
-          </button>
+          </Button>
         </form>
       )}
     </div>
