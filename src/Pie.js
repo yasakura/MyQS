@@ -51,21 +51,17 @@ const Pie = () => {
     const date = event.target.date.value;
     const diet = event.target.diet.value;
     const meal = event.target.meal.value;
-    const savedDiet = diets;
+    const rawDiets = diets;
     const dietEntry = { date, diet, meal };
-    const dateFilter = () => diet.date === date && diet.meal === meal;
-    const currentDateInSavedDiet = savedDiet.filter(dateFilter);
-    const currentDateIndexInSavedDiet = savedDiet.findIndex(dateFilter);
-    const isCurrentDateInSavedDiet = currentDateInSavedDiet.length > 0;
-    let dietEntryToSave = [...savedDiet];
-
-    if (isCurrentDateInSavedDiet) {
-      dietEntryToSave.splice(currentDateIndexInSavedDiet, 1);
+    const dietFilter = (item) =>
+      dietEntry.date === item.date && dietEntry.meal === item.meal;
+    const currentDietInSavedDiet = rawDiets.filter(dietFilter);
+    const currentDietFirstIndexInSavedDiet = rawDiets.findIndex(dietFilter);
+    const isCurrentDietInSavedDiet = currentDietInSavedDiet.length > 0;
+    if (isCurrentDietInSavedDiet) {
+      rawDiets.splice(currentDietFirstIndexInSavedDiet, currentDietInSavedDiet.length);
     }
-
-    dietEntryToSave = [...dietEntryToSave, dietEntry];
-
-    localStorage.setItem("diet", JSON.stringify(dietEntryToSave));
+    const dietEntryToSave = [...rawDiets, dietEntry];
     writeUserData(dietEntryToSave);
   };
 
