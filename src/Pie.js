@@ -219,7 +219,9 @@ const Pie = () => {
       {user && (
         <div>
           <p>Utilisateur: {user.email}</p>
-          <button onClick={logout} type="submit">Se déconnecter</button>
+          <button onClick={logout} type="submit">
+            Se déconnecter
+          </button>
         </div>
       )}
 

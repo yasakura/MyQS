@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import "./App.css";
-import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import React from "react";
+import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./libs/firebase";
 import Login from "./components/login";
@@ -32,7 +32,9 @@ function App() {
         className="App"
         style={{ maxWidth: "375px", margin: "0 auto", padding: "0 10px" }}
       >
-        <header style={{ margin: "20px 0" }}>{process.env.REACT_APP_WEBSITE_NAME}</header>
+        <header style={{ margin: "20px 0" }}>
+          {process.env.REACT_APP_WEBSITE_NAME}
+        </header>
         <Loading />
       </div>
     );
@@ -43,8 +45,10 @@ function App() {
       className="App"
       style={{ maxWidth: "375px", margin: "0 auto", padding: "0 10px" }}
     >
-      <header style={{ margin: "20px 0" }}>{process.env.REACT_APP_WEBSITE_NAME}</header>
-      {!user ? <Login /> : <Pie />}
+      <header style={{ margin: "20px 0" }}>
+        {process.env.REACT_APP_WEBSITE_NAME}
+      </header>
+      {user ? <Pie /> : <Login />}
     </div>
   );
 }
