@@ -5,17 +5,13 @@ import { ref, set } from "firebase/database";
 import { useObjectVal } from "react-firebase-hooks/database";
 import Button from "@mui/material/Button";
 import { auth, database } from "./libs/firebase";
-import Loading from "./components/loading";
 import { logOut } from "./services/auth";
 
 const Pie = () => {
   const [user] = useAuthState(auth);
   const userId = user?.uid;
-  const [snapshot, loadingDatabase] = useObjectVal(
-    ref(database, `users/${userId}`)
-  );
+  const [snapshot] = useObjectVal(ref(database, `users/${userId}`));
   const diets = snapshot || [];
-  // console.log("diets from server", diets)
 
   const getDietNumber = () => {
     const dietDates = diets.reduce((previousValue, currentValue) => {
@@ -108,10 +104,6 @@ const Pie = () => {
   const nearestDate = getNearestDate()
     ? new Date(getNearestDate()).toLocaleDateString("fr")
     : "Aucune 🤷‍";
-
-  if (loadingDatabase) {
-    return <Loading />;
-  }
 
   return (
     <>

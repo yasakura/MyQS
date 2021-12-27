@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, {useState} from "react";
 import Button from "@mui/material/Button";
-import { auth } from "../libs/firebase";
 import handleError from "../utils/error";
-import Loading from "./loading";
-import {sendSignIn} from "../services/auth";
+import { sendSignIn } from "../services/auth";
 
 const Login = () => {
-  const [loading] = useAuthState(auth);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const login = (email) => {
@@ -37,29 +33,25 @@ const Login = () => {
         justifyContent: "center",
       }}
     >
-      {loading ? (
-        <Loading />
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Renseigne ton email
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              style={{ marginLeft: "10px" }}
-            />
-          </label>
-          <br />
-          <br />
-          <Button type="submit" variant="contained" disabled={isButtonDisabled}>
-            {!isButtonDisabled
-              ? "Recevoir le lien de connexion"
-              : "Patiente un peu 🚀"}
-          </Button>
-        </form>
-      )}
+      <form onSubmit={handleSubmit}>
+        <label>
+          Renseigne ton email
+          <input
+            type="email"
+            name="email"
+            id="email"
+            required
+            style={{ marginLeft: "10px" }}
+          />
+        </label>
+        <br />
+        <br />
+        <Button type="submit" variant="contained" disabled={isButtonDisabled}>
+          {!isButtonDisabled
+            ? "Recevoir le lien de connexion"
+            : "Patiente un peu 🚀"}
+        </Button>
+      </form>
     </div>
   );
 };
