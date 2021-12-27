@@ -1,5 +1,8 @@
-import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
-import { auth } from "../libs/firebase";
+import {
+  isSignInWithEmailLink,
+  signInWithEmailLink,
+} from "firebase/auth";
+import {auth, logout} from "../libs/firebase";
 import handleError from "../utils/error";
 
 export const signIn = () => {
@@ -21,4 +24,4 @@ export const signIn = () => {
   }
 };
 
-export default signIn;
+export const logOut = () => logout();

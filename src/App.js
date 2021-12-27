@@ -6,8 +6,7 @@ import { auth } from "./libs/firebase";
 import Login from "./components/login";
 import Loading from "./components/loading";
 import Pie from "./Pie";
-// eslint-disable-next-line import/no-named-as-default
-import signIn from "./services/auth";
+import { signIn } from "./services/auth";
 
 function App() {
   const [user, loading] = useAuthState(auth);

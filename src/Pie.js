@@ -4,8 +4,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, set } from "firebase/database";
 import { useObjectVal } from "react-firebase-hooks/database";
 import Button from "@mui/material/Button";
-import { auth, database, logout } from "./libs/firebase";
+import { auth, database } from "./libs/firebase";
 import Loading from "./components/loading";
+import { logOut } from "./services/auth";
 
 const Pie = () => {
   const [user] = useAuthState(auth);
@@ -15,7 +16,6 @@ const Pie = () => {
   );
   const diets = snapshot || [];
   // console.log("diets from server", diets)
-
 
   const getDietNumber = () => {
     const dietDates = diets.reduce((previousValue, currentValue) => {
@@ -62,7 +62,10 @@ const Pie = () => {
     const currentDietFirstIndexInSavedDiet = rawDiets.findIndex(dietFilter);
     const isCurrentDietInSavedDiet = currentDietInSavedDiet.length > 0;
     if (isCurrentDietInSavedDiet) {
-      rawDiets.splice(currentDietFirstIndexInSavedDiet, currentDietInSavedDiet.length);
+      rawDiets.splice(
+        currentDietFirstIndexInSavedDiet,
+        currentDietInSavedDiet.length
+      );
     }
     const dietEntryToSave = [...rawDiets, dietEntry];
     writeUserData(dietEntryToSave);
@@ -218,7 +221,7 @@ const Pie = () => {
       {user && (
         <div>
           <p>Utilisateur: {user.email}</p>
-          <Button onClick={logout} type="submit" variant="outlined">
+          <Button onClick={logOut} type="submit" variant="outlined">
             Se déconnecter
           </Button>
         </div>

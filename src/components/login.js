@@ -10,14 +10,14 @@ const Login = () => {
   const [loading] = useAuthState(auth);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  const login = async (email) => {
+  const login = (email) => {
     setIsButtonDisabled(true);
     const actionCodeSettings = {
       url: window.location.href,
       handleCodeInApp: true,
     };
 
-    await sendSignInLinkToEmail(auth, email, actionCodeSettings)
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
       .then(() => {
         window.localStorage.setItem("emailForSignIn", email);
         alert("Tu vas recevoir un mail pour te connecter 💌");
