@@ -14,7 +14,10 @@ export const signIn = () => {
         window.localStorage.removeItem("emailForSignIn");
         window.location.search = "";
       })
-      .catch(handleError);
+      .catch((error) => {
+        if (error?.code === "auth/invalid-action-code") return;
+        handleError(error);
+      });
   }
 };
 
