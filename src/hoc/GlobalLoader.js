@@ -17,8 +17,6 @@ const GlobalLoader = ({ children }) => {
       ref(database, `users/${userId}`)
   );
 
-  console.log("loading", loading)
-  console.log("loadingDatabase", loadingDatabase)
   if(!loading || !loadingDatabase) setTimeout(() => setLoading(false), 1000);
   useContext(() => {
     if (loading || loadingDatabase) {
