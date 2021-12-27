@@ -1,30 +1,18 @@
 // import logo from './logo.svg';
 import "./css/App.css";
-import React from "react";
-import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
+import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./libs/firebase";
 import Login from "./components/login";
 import Loading from "./components/loading";
 import Pie from "./Pie";
-import handleError from "./utils/error";
+// eslint-disable-next-line import/no-named-as-default
+import signIn from "./services/auth";
 
 function App() {
   const [user, loading] = useAuthState(auth);
 
-  if (isSignInWithEmailLink(auth, window.location.href)) {
-    let email = window.localStorage.getItem("emailForSignIn");
-    if (!email) {
-      email = window.prompt("Entrez votre email pour confirmation");
-    }
-
-    signInWithEmailLink(auth, email, window.location.href)
-      .then(() => {
-        window.localStorage.removeItem("emailForSignIn");
-        window.location.search = "";
-      })
-      .catch(handleError);
-  }
+  useEffect(() => signIn());
 
   if (loading) {
     return (
