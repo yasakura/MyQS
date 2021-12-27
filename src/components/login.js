@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { sendSignInLinkToEmail } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Button from "@mui/material/Button";
 import { auth } from "../libs/firebase";
 import handleError from "../utils/error";
 import Loading from "./loading";
+import {sendSignIn} from "../services/auth";
 
 const Login = () => {
   const [loading] = useAuthState(auth);
@@ -12,12 +12,8 @@ const Login = () => {
 
   const login = (email) => {
     setIsButtonDisabled(true);
-    const actionCodeSettings = {
-      url: window.location.href,
-      handleCodeInApp: true,
-    };
 
-    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+    sendSignIn(email)
       .then(() => {
         window.localStorage.setItem("emailForSignIn", email);
         alert("Tu vas recevoir un mail pour te connecter 💌");

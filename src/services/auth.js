@@ -1,9 +1,22 @@
 import {
   isSignInWithEmailLink,
+  sendSignInLinkToEmail,
   signInWithEmailLink,
 } from "firebase/auth";
-import {auth, logout} from "../libs/firebase";
+import { auth, logout } from "../libs/firebase";
 import handleError from "../utils/error";
+
+export const logOut = () => logout();
+
+export const sendSignIn = (email) => {
+  const actionCodeSettings = {
+    url: window.location.href,
+    handleCodeInApp: true,
+  };
+  return Promise.resolve(
+      sendSignInLinkToEmail(auth, email, actionCodeSettings)
+  );
+};
 
 export const signIn = () => {
   if (isSignInWithEmailLink(auth, window.location.href)) {
@@ -23,5 +36,3 @@ export const signIn = () => {
       });
   }
 };
-
-export const logOut = () => logout();
