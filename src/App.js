@@ -3,7 +3,7 @@ import "./css/App.css";
 import React, { useEffect } from "react";
 import Login from "./components/login";
 import Pie from "./Pie";
-import { signIn, useGetUser as getUser } from "./services/auth";
+import { signIn, getUser } from "./services/auth";
 import GlobalLoader from "./hoc/GlobalLoader";
 
 function App() {

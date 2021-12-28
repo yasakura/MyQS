@@ -3,23 +3,23 @@ import {
   sendSignInLinkToEmail,
   signInWithEmailLink,
 } from "firebase/auth";
-import {useAuthState} from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../libs/firebase";
 import handleError from "../utils/error";
 
-export const logOut = () => logout();
+const logOut = () => logout();
 
-export const sendSignIn = (email) => {
+const sendSignIn = (email) => {
   const actionCodeSettings = {
     url: window.location.href,
     handleCodeInApp: true,
   };
   return Promise.resolve(
-      sendSignInLinkToEmail(auth, email, actionCodeSettings)
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
   );
 };
 
-export const signIn = () => {
+const signIn = () => {
   if (isSignInWithEmailLink(auth, window.location.href)) {
     let email = window.localStorage.getItem("emailForSignIn");
     if (!email) {
@@ -38,7 +38,9 @@ export const signIn = () => {
   }
 };
 
-export const useGetUser = () => {
+const useGetUser = () => {
   const [user] = useAuthState(auth);
   return user;
-}
+};
+
+export { sendSignIn, logOut, signIn, useGetUser as getUser};

@@ -3,7 +3,7 @@ import { PieChart } from "react-minimal-pie-chart";
 import { ref, set } from "firebase/database";
 import Button from "@mui/material/Button";
 import { database } from "./libs/firebase";
-import { logOut, useGetUser as getUser } from "./services/auth";
+import { logOut, getUser } from "./services/auth";
 import retrieveDiets from "./services/retriveDiets";
 
 const Pie = () => {
