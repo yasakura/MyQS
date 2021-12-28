@@ -6,9 +6,9 @@ import { auth, database } from "../libs/firebase";
 const useRetrieveDiets = () => {
   const [user] = useAuthState(auth);
   const userId = user?.uid;
-  const [snapshot, loading] = useObjectVal(ref(database, `users/${userId}`));
+  const [diets, loadingDiets] = useObjectVal(ref(database, `users/${userId}`));
 
-  return { diets: snapshot || [], loadingDiets: loading };
+  return { diets: diets || [], loadingDiets };
 };
 
 const useSendDiets = (user, data) =>
