@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../components/loading";
 import { auth } from "../libs/firebase";
-import retrieveDiets from "../services/retriveDiets";
+import { retrieveDiets } from "../services/retrieveDiets";
 
 const GlobalLoader = ({ children }) => {
   const [isLoading, setLoading] = useState(true);

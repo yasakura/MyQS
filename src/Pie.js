@@ -4,7 +4,7 @@ import { ref, set } from "firebase/database";
 import Button from "@mui/material/Button";
 import { database } from "./libs/firebase";
 import { logOut, getUser } from "./services/auth";
-import retrieveDiets from "./services/retriveDiets";
+import { retrieveDiets } from "./services/retrieveDiets";
 
 const Pie = () => {
   const user = getUser();

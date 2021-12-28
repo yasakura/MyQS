@@ -11,4 +11,5 @@ const useRetrieveDiets = () => {
   return { diets: snapshot || [], loadingDiets: loading };
 };
 
-export default useRetrieveDiets;
+// eslint-disable-next-line import/prefer-default-export
+export { useRetrieveDiets as retrieveDiets };
