@@ -13,11 +13,11 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const auth = getAuth();
 
-const logout = () => {
+export const database = getDatabase(app);
+
+export const auth = getAuth();
+
+export  const logout = () => {
   signOut(auth);
 };
-
-export { auth, database, logout };

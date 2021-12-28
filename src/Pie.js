@@ -1,17 +1,14 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, set } from "firebase/database";
-import { useObjectVal } from "react-firebase-hooks/database";
 import Button from "@mui/material/Button";
-import { auth, database } from "./libs/firebase";
-import { logOut } from "./services/auth";
+import { database } from "./libs/firebase";
+import { logOut, useGetUser as getUser } from "./services/auth";
+import retrieveDiets from "./services/retriveDiets";
 
 const Pie = () => {
-  const [user] = useAuthState(auth);
-  const userId = user?.uid;
-  const [snapshot] = useObjectVal(ref(database, `users/${userId}`));
-  const diets = snapshot || [];
+  const user = getUser();
+  const { diets } = retrieveDiets();
 
   const getDietNumber = () => {
     const dietDates = diets.reduce((previousValue, currentValue) => {
@@ -42,7 +39,7 @@ const Pie = () => {
   };
 
   const writeUserData = (data) => {
-    set(ref(database, `users/${userId}`), data);
+    set(ref(database, `users/${user?.id}`), data);
   };
 
   const handleSubmit = async (event) => {

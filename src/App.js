@@ -1,15 +1,13 @@
 // import logo from './logo.svg';
 import "./css/App.css";
 import React, { useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "./libs/firebase";
 import Login from "./components/login";
 import Pie from "./Pie";
-import { signIn } from "./services/auth";
+import { signIn, useGetUser as getUser } from "./services/auth";
 import GlobalLoader from "./hoc/GlobalLoader";
 
 function App() {
-  const [user] = useAuthState(auth);
+  const user = getUser();
 
   useEffect(() => signIn());
 

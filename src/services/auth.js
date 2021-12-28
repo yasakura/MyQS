@@ -3,6 +3,7 @@ import {
   sendSignInLinkToEmail,
   signInWithEmailLink,
 } from "firebase/auth";
+import {useAuthState} from "react-firebase-hooks/auth";
 import { auth, logout } from "../libs/firebase";
 import handleError from "../utils/error";
 
@@ -36,3 +37,8 @@ export const signIn = () => {
       });
   }
 };
+
+export const useGetUser = () => {
+  const [user] = useAuthState(auth);
+  return user;
+}
