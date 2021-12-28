@@ -1,10 +1,8 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
-import { ref, set } from "firebase/database";
 import Button from "@mui/material/Button";
-import { database } from "./libs/firebase";
-import { logOut, getUser } from "./services/auth";
-import { retrieveDiets } from "./services/retrieveDiets";
+import {getUser, logOut} from "./services/auth";
+import { retrieveDiets, sendDiets } from "./services/diets";
 
 const Pie = () => {
   const user = getUser();
@@ -38,11 +36,7 @@ const Pie = () => {
     ];
   };
 
-  const writeUserData = (data) => {
-    set(ref(database, `users/${user?.id}`), data);
-  };
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const date = event.target.date.value;
     const diet = event.target.diet.value;
@@ -61,7 +55,7 @@ const Pie = () => {
       );
     }
     const dietEntryToSave = [...rawDiets, dietEntry];
-    writeUserData(dietEntryToSave);
+    sendDiets(user, dietEntryToSave);
   };
 
   const getDatesFromSavedDiet = () =>

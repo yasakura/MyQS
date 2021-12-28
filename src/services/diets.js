@@ -1,6 +1,6 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useObjectVal } from "react-firebase-hooks/database";
-import { ref } from "firebase/database";
+import { ref, set } from "firebase/database";
 import { auth, database } from "../libs/firebase";
 
 const useRetrieveDiets = () => {
@@ -11,5 +11,7 @@ const useRetrieveDiets = () => {
   return { diets: snapshot || [], loadingDiets: loading };
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { useRetrieveDiets as retrieveDiets };
+const useSendDiets = (user, data) =>
+  set(ref(database, `users/${user?.uid}`), data);
+
+export { useRetrieveDiets as retrieveDiets, useSendDiets as sendDiets };

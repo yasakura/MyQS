@@ -18,6 +18,6 @@ export const database = getDatabase(app);
 
 export const auth = getAuth();
 
-export  const logout = () => {
+export const logout = () => {
   signOut(auth);
 };

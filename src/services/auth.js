@@ -19,14 +19,14 @@ const sendSignIn = (email) => {
   );
 };
 
-const signIn = () => {
+const signIn = async () => {
   if (isSignInWithEmailLink(auth, window.location.href)) {
     let email = window.localStorage.getItem("emailForSignIn");
     if (!email) {
       email = window.prompt("Entrez votre email pour confirmation");
     }
 
-    signInWithEmailLink(auth, email, window.location.href)
+    await signInWithEmailLink(auth, email, window.location.href)
       .then(() => {
         window.localStorage.removeItem("emailForSignIn");
         window.location.search = "";

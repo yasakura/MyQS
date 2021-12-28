@@ -1,9 +1,9 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../components/loading";
 import { auth } from "../libs/firebase";
-import { retrieveDiets } from "../services/retrieveDiets";
+import { retrieveDiets } from "../services/diets";
 
 const GlobalLoader = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const GlobalLoader = ({ children }) => {
     } else {
       setLoading(false);
     }
-  },[setLoading, loading, loadingDiets]);
+  }, [setLoading, loading, loadingDiets]);
 
   return isLoading ? <Loading /> : children;
 };
