@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../components/loading";
-import { auth } from "../libs/firebase";
 import { retrieveDiets } from "../services/diets";
+import { retrieveUser } from "../services/auth";
 
 const GlobalLoader = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
   const { loadingDiets } = retrieveDiets();
-  const [, loadingUser] = useAuthState(auth);
+  const { loadingUser } = retrieveUser();
   const shouldShowLoader = loadingUser || loadingDiets;
 
   useEffect(() => {

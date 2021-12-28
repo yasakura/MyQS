@@ -38,9 +38,9 @@ const signIn = async () => {
   }
 };
 
-const useGetUser = () => {
-  const [user] = useAuthState(auth);
-  return user;
+const useRetrieveUser = () => {
+  const [user, loadingUser] = useAuthState(auth);
+  return {user, loadingUser};
 };
 
-export { sendSignIn, logOut, signIn, useGetUser as getUser };
+export { sendSignIn, logOut, signIn, useRetrieveUser as retrieveUser };

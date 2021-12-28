@@ -1,11 +1,11 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import Button from "@mui/material/Button";
-import { getUser, logOut } from "./services/auth";
+import { retrieveUser, logOut } from "./services/auth";
 import { retrieveDiets, sendDiets } from "./services/diets";
 
 const Pie = () => {
-  const user = getUser();
+  const { user } = retrieveUser();
   const { diets } = retrieveDiets();
 
   const getDietNumber = () => {

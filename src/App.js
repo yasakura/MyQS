@@ -3,11 +3,11 @@ import "./css/App.css";
 import React, { useEffect } from "react";
 import Login from "./components/login";
 import Pie from "./Pie";
-import { signIn, getUser } from "./services/auth";
+import { signIn, retrieveUser } from "./services/auth";
 import GlobalLoader from "./hoc/GlobalLoader";
 
 function App() {
-  const user = getUser();
+  const { user } = retrieveUser();
 
   useEffect(() => signIn());
 
