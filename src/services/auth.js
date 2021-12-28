@@ -43,4 +43,4 @@ const useGetUser = () => {
   return user;
 };
 
-export { sendSignIn, logOut, signIn, useGetUser as getUser};
+export { sendSignIn, logOut, signIn, useGetUser as getUser };

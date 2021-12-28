@@ -8,16 +8,16 @@ import { retrieveDiets } from "../services/diets";
 const GlobalLoader = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
   const { loadingDiets } = retrieveDiets();
-  const [, loading] = useAuthState(auth);
+  const [, loadingUser] = useAuthState(auth);
+  const shouldShowLoader = loadingUser || loadingDiets;
 
-  if (!loading || !loadingDiets) setTimeout(() => setLoading(false), 1000);
   useEffect(() => {
-    if (loading || loadingDiets) {
-      setLoading(true);
+    if (shouldShowLoader) {
+      setTimeout(() => setLoading(true), 500);
     } else {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 500);
     }
-  }, [setLoading, loading, loadingDiets]);
+  }, [setLoading, shouldShowLoader]);
 
   return isLoading ? <Loading /> : children;
 };
