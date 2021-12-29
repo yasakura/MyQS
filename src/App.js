@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import "./css/App.css";
 import React, { useEffect } from "react";
-import Login from "./components/login";
+import Login from "./components/Login";
 import Pie from "./Pie";
 import { signIn, retrieveUser } from "./services/auth";
 import GlobalLoader from "./hoc/GlobalLoader";

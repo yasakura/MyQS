@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Loading from "../components/loading";
+import Loading from "../components/Loading";
 import { retrieveDiets } from "../services/diets";
 import { retrieveUser } from "../services/auth";
 
