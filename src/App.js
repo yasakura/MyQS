@@ -2,7 +2,7 @@
 import "./css/App.css";
 import React, { useEffect } from "react";
 import Login from "./components/Login";
-import MyQS from "./MyQS";
+import MyQS from "./components/MyQS";
 import { signIn, retrieveUser } from "./services/auth";
 import GlobalLoader from "./hoc/GlobalLoader";
 

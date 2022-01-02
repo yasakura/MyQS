@@ -1,9 +1,9 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import DietForm from "./components/DietForm";
-import Pie from "./components/Pie";
-import { logOut, retrieveUser } from "./services/auth";
-import { retrieveDiets, sendDiets } from "./services/diets";
+import DietForm from "./DietForm";
+import Pie from "./Pie";
+import { logOut, retrieveUser } from "../services/auth";
+import { retrieveDiets, sendDiets } from "../services/diets";
 
 const MyQS = () => {
   const { user } = retrieveUser();
