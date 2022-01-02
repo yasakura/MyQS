@@ -7,11 +7,7 @@ const DietForm = () => {
   const { user } = retrieveUser();
   const { diets } = retrieveDiets();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const date = event.target.date.value;
-    const diet = event.target.diet.value;
-    const meal = event.target.meal.value;
+  const composeUserDiet = (date, diet, meal) => {
     const rawDiets = diets;
     const dietEntry = { date, diet, meal };
     const dietFilter = (item) =>
@@ -25,9 +21,17 @@ const DietForm = () => {
         currentDietInSavedDiet.length
       );
     }
-    const dietEntryToSave = [...rawDiets, dietEntry];
 
-    sendDiets(user, dietEntryToSave);
+    return [...rawDiets, dietEntry];
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const date = event.target.date.value;
+    const diet = event.target.diet.value;
+    const meal = event.target.meal.value;
+
+    sendDiets(user, composeUserDiet(date, diet, meal));
   };
 
   const labelStyle = {
