@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import DietForm from "./DietForm";
 import Pie from "./Pie";
 import { logOut, retrieveUser } from "../services/auth";
-import { retrieveDiets, sendDiets } from "../services/diets";
+import { retrieveDiets } from "../services/diets";
 
 const MyQS = () => {
   const { user } = retrieveUser();
@@ -37,28 +37,6 @@ const MyQS = () => {
     ];
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const date = event.target.date.value;
-    const diet = event.target.diet.value;
-    const meal = event.target.meal.value;
-    const rawDiets = diets;
-    const dietEntry = { date, diet, meal };
-    const dietFilter = (item) =>
-      dietEntry.date === item.date && dietEntry.meal === item.meal;
-    const currentDietInSavedDiet = rawDiets.filter(dietFilter);
-    const currentDietFirstIndexInSavedDiet = rawDiets.findIndex(dietFilter);
-    const isCurrentDietInSavedDiet = currentDietInSavedDiet.length > 0;
-    if (isCurrentDietInSavedDiet) {
-      rawDiets.splice(
-        currentDietFirstIndexInSavedDiet,
-        currentDietInSavedDiet.length
-      );
-    }
-    const dietEntryToSave = [...rawDiets, dietEntry];
-    sendDiets(user, dietEntryToSave);
-  };
-
   const getDatesFromSavedDiet = () =>
     diets.reduce((previousValue, currentValue) => {
       previousValue.push(currentValue.date);
@@ -73,24 +51,6 @@ const MyQS = () => {
     );
 
     return sortedByDiff[0];
-  };
-
-  const labelStyle = {
-    border: "solid 1px black",
-    height: "100px",
-    borderRadius: "5px",
-    padding: "5px",
-    width: "100px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-  };
-
-  const lunchLabelStyle = {
-    ...labelStyle,
-    width: "65px",
-    height: "65px",
   };
 
   const nearestDate = getNearestDate()
@@ -109,11 +69,7 @@ const MyQS = () => {
         }
       />
 
-      <DietForm
-        onSubmit={handleSubmit}
-        style={lunchLabelStyle}
-        style1={labelStyle}
-      />
+      <DietForm />
 
       <div>
         <p>Nombre de jours : {getDietNumber()}</p>

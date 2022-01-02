@@ -1,105 +1,126 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
+import { retrieveDiets, sendDiets } from "../services/diets";
+import { retrieveUser } from "../services/auth";
 
-const DietForm = ({ onSubmit, style, style1 }) => (
-  <form onSubmit={onSubmit}>
-    <label>
-      Date
-      <input type="date" name="date" id="date" required />
-    </label>
-    <br />
-    <br />
-    <br />
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        marginBottom: "40px",
-      }}
-    >
-      <label style={style}>
-        Matin <br />
-        <input type="radio" name="meal" value="breakfast" required />
-      </label>
-      <br />
-      <br />
-      <label style={style}>
-        Midi <br />
-        <input type="radio" name="meal" value="lunch" />
-      </label>
-      <br />
-      <br />
-      <label style={style}>
-        Goûter <br />
-        <input type="radio" name="meal" value="snack" />
-      </label>
-      <br />
-      <br />
-      <label style={style}>
-        Soir <br />
-        <input type="radio" name="meal" value="dinner" />
-      </label>
-    </div>
+const DietForm = () => {
+  const { user } = retrieveUser();
+  const { diets } = retrieveDiets();
 
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
-    >
-      <label style={style1}>
-        Végétarien <br />
-        <input type="radio" name="diet" value="vegetarian" required />
-      </label>
-      <br />
-      <br />
-      <label style={style1}>
-        Végan <br />
-        <input type="radio" name="diet" value="vegan" />
-      </label>
-      <br />
-      <br />
-      <label style={style1}>
-        Omnivore <br />
-        <input type="radio" name="diet" value="omnivore" />
-      </label>
-    </div>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const date = event.target.date.value;
+    const diet = event.target.diet.value;
+    const meal = event.target.meal.value;
+    const rawDiets = diets;
+    const dietEntry = { date, diet, meal };
+    const dietFilter = (item) =>
+      dietEntry.date === item.date && dietEntry.meal === item.meal;
+    const currentDietInSavedDiet = rawDiets.filter(dietFilter);
+    const currentDietFirstIndexInSavedDiet = rawDiets.findIndex(dietFilter);
+    const isCurrentDietInSavedDiet = currentDietInSavedDiet.length > 0;
+    if (isCurrentDietInSavedDiet) {
+      rawDiets.splice(
+        currentDietFirstIndexInSavedDiet,
+        currentDietInSavedDiet.length
+      );
+    }
+    const dietEntryToSave = [...rawDiets, dietEntry];
 
-    <br />
-    <br />
-    <Button type="submit" variant="contained">
-      Enregistrer
-    </Button>
-  </form>
-);
+    sendDiets(user, dietEntryToSave);
+  };
 
-DietForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  style: PropTypes.shape({
-    border: PropTypes.string,
-    padding: PropTypes.string,
-    borderRadius: PropTypes.string,
-    alignItems: PropTypes.string,
-    flexDirection: PropTypes.string,
-    display: PropTypes.string,
-    width: PropTypes.string,
-    justifyContent: PropTypes.string,
-    height: PropTypes.string,
-  }).isRequired,
-  style1: PropTypes.shape({
-    border: PropTypes.string,
-    padding: PropTypes.string,
-    borderRadius: PropTypes.string,
-    alignItems: PropTypes.string,
-    flexDirection: PropTypes.string,
-    display: PropTypes.string,
-    width: PropTypes.string,
-    justifyContent: PropTypes.string,
-    height: PropTypes.string,
-  }).isRequired,
+  const labelStyle = {
+    border: "solid 1px black",
+    height: "100px",
+    borderRadius: "5px",
+    padding: "5px",
+    width: "100px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  };
+
+  const lunchLabelStyle = {
+    ...labelStyle,
+    width: "65px",
+    height: "65px",
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Date
+        <input type="date" name="date" id="date" required />
+      </label>
+      <br />
+      <br />
+      <br />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "40px",
+        }}
+      >
+        <label style={lunchLabelStyle}>
+          Matin <br />
+          <input type="radio" name="meal" value="breakfast" required />
+        </label>
+        <br />
+        <br />
+        <label style={lunchLabelStyle}>
+          Midi <br />
+          <input type="radio" name="meal" value="lunch" />
+        </label>
+        <br />
+        <br />
+        <label style={lunchLabelStyle}>
+          Goûter <br />
+          <input type="radio" name="meal" value="snack" />
+        </label>
+        <br />
+        <br />
+        <label style={lunchLabelStyle}>
+          Soir <br />
+          <input type="radio" name="meal" value="dinner" />
+        </label>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <label style={labelStyle}>
+          Végétarien <br />
+          <input type="radio" name="diet" value="vegetarian" required />
+        </label>
+        <br />
+        <br />
+        <label style={labelStyle}>
+          Végan <br />
+          <input type="radio" name="diet" value="vegan" />
+        </label>
+        <br />
+        <br />
+        <label style={labelStyle}>
+          Omnivore <br />
+          <input type="radio" name="diet" value="omnivore" />
+        </label>
+      </div>
+
+      <br />
+      <br />
+      <Button type="submit" variant="contained">
+        Enregistrer
+      </Button>
+    </form>
+  );
 };
 
 export default DietForm;
