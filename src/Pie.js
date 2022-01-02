@@ -1,7 +1,8 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import Button from "@mui/material/Button";
-import { retrieveUser, logOut } from "./services/auth";
+import DietForm from "./components/DietForm";
+import { logOut, retrieveUser } from "./services/auth";
 import { retrieveDiets, sendDiets } from "./services/diets";
 
 const Pie = () => {
@@ -123,77 +124,11 @@ const Pie = () => {
         )}
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Date
-          <input type="date" name="date" id="date" required />
-        </label>
-        <br />
-        <br />
-        <br />
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "40px",
-          }}
-        >
-          <label style={lunchLabelStyle}>
-            Matin <br />
-            <input type="radio" name="meal" value="breakfast" required />
-          </label>
-          <br />
-          <br />
-          <label style={lunchLabelStyle}>
-            Midi <br />
-            <input type="radio" name="meal" value="lunch" />
-          </label>
-          <br />
-          <br />
-          <label style={lunchLabelStyle}>
-            Goûter <br />
-            <input type="radio" name="meal" value="snack" />
-          </label>
-          <br />
-          <br />
-          <label style={lunchLabelStyle}>
-            Soir <br />
-            <input type="radio" name="meal" value="dinner" />
-          </label>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <label style={labelStyle}>
-            Végétarien <br />
-            <input type="radio" name="diet" value="vegetarian" required />
-          </label>
-          <br />
-          <br />
-          <label style={labelStyle}>
-            Végan <br />
-            <input type="radio" name="diet" value="vegan" />
-          </label>
-          <br />
-          <br />
-          <label style={labelStyle}>
-            Omnivore <br />
-            <input type="radio" name="diet" value="omnivore" />
-          </label>
-        </div>
-
-        <br />
-        <br />
-        <Button type="submit" variant="contained">
-          Enregistrer
-        </Button>
-      </form>
+      <DietForm
+        onSubmit={handleSubmit}
+        style={lunchLabelStyle}
+        style1={labelStyle}
+      />
 
       <div>
         <p>Nombre de jours : {getDietNumber()}</p>
