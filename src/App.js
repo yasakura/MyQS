@@ -2,7 +2,7 @@
 import "./css/App.css";
 import React, { useEffect } from "react";
 import Login from "./components/Login";
-import Pie from "./Pie";
+import MyQS from "./MyQS";
 import { signIn, retrieveUser } from "./services/auth";
 import GlobalLoader from "./hoc/GlobalLoader";
 
@@ -20,7 +20,7 @@ function App() {
         <header style={{ margin: "20px 0" }}>
           {process.env.REACT_APP_WEBSITE_NAME}
         </header>
-        {user ? <Pie /> : <Login />}
+        {user ? <MyQS /> : <Login />}
       </div>
     </GlobalLoader>
   );

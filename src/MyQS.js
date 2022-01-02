@@ -1,11 +1,11 @@
 import React from "react";
-import { PieChart } from "react-minimal-pie-chart";
 import Button from "@mui/material/Button";
 import DietForm from "./components/DietForm";
+import Pie from "./components/Pie";
 import { logOut, retrieveUser } from "./services/auth";
 import { retrieveDiets, sendDiets } from "./services/diets";
 
-const Pie = () => {
+const MyQS = () => {
   const { user } = retrieveUser();
   const { diets } = retrieveDiets();
 
@@ -99,30 +99,15 @@ const Pie = () => {
 
   return (
     <>
-      <div style={{ width: "70%", height: "300px", margin: "0 auto 30px" }}>
-        {diets.length === 0 ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <p>Remplis le formulaire 😉</p>
-          </div>
-        ) : (
-          <PieChart
-            data={getData()}
-            label={({ dataEntry }) =>
-              dataEntry.value > 0
-                ? `${dataEntry.title} : ${Math.round(dataEntry.percentage)}%`
-                : null
-            }
-            labelStyle={{ fontSize: "6px" }}
-          />
-        )}
-      </div>
+      <Pie
+        diets={diets}
+        data={getData()}
+        label={({ dataEntry }) =>
+          dataEntry.value > 0
+            ? `${dataEntry.title} : ${Math.round(dataEntry.percentage)}%`
+            : null
+        }
+      />
 
       <DietForm
         onSubmit={handleSubmit}
@@ -151,6 +136,6 @@ const Pie = () => {
   );
 };
 
-Pie.propTypes = {};
+MyQS.propTypes = {};
 
-export default Pie;
+export default MyQS;
