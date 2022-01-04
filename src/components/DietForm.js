@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
+import SnackbarStack from "./SnackbarStack";
 import { retrieveDiets, sendDiets } from "../services/diets";
 import { retrieveUser } from "../services/auth";
 
-const SUCCESS_MESSAGE_LENGTH_DURATION = 3000;
-
 const DietForm = () => {
+  const [snackPack, setSnackPack] = React.useState([]);
   const { user } = retrieveUser();
   const { diets } = retrieveDiets();
-  const [isSnackbarShowed, setSnackbarShowed] = useState(false);
-  const [snackPack, setSnackPack] = React.useState([]);
-  const [messageInfo, setMessageInfo] = React.useState(undefined);
 
   const composeUserDiet = (date, diet, meal) => {
     const rawDiets = diets;
@@ -33,20 +28,10 @@ const DietForm = () => {
   };
 
   const handleSuccessMessage = () => {
-    // setSnackbarShowed(true);
-    setSnackPack((prev) => [...prev, { message: new Date().getTime(), key: new Date().getTime() }]);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setSnackbarShowed(false);
-  };
-
-  const handleExited = () => {
-    setMessageInfo(undefined);
+    setSnackPack((prev) => [
+      ...prev,
+      { key: new Date().getTime() },
+    ]);
   };
 
   const handleSubmit = (event) => {
@@ -77,18 +62,6 @@ const DietForm = () => {
     width: "65px",
     height: "65px",
   };
-
-  React.useEffect(() => {
-    if (snackPack.length && !messageInfo) {
-      // Set a new snack when we don't have an active one
-      setMessageInfo({ ...snackPack[0] });
-      setSnackPack((prev) => prev.slice(1));
-      setSnackbarShowed(true);
-    } else if (snackPack.length && messageInfo && isSnackbarShowed) {
-      // Close an active snack when a new one is added
-      setSnackbarShowed(false);
-    }
-  }, [snackPack, messageInfo, isSnackbarShowed]);
 
   return (
     <>
@@ -164,15 +137,7 @@ const DietForm = () => {
         </Button>
       </form>
 
-      <Snackbar
-        open={isSnackbarShowed}
-        autoHideDuration={SUCCESS_MESSAGE_LENGTH_DURATION}
-        onClose={handleClose}
-        key={messageInfo ? messageInfo.key : undefined}
-        TransitionProps={{ onExited: handleExited }}
-      >
-        <Alert severity="success">Repas enregistré</Alert>
-      </Snackbar>
+      <SnackbarStack snackPack={snackPack} setSnackPack={setSnackPack} />
     </>
   );
 };
