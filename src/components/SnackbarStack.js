@@ -34,6 +34,7 @@ const SnackbarStack = ({ snackPack, setSnackPack }) => {
   return (
     <Snackbar
       TransitionProps={{ onExited: handleExited }}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
       autoHideDuration={SUCCESS_MESSAGE_LENGTH_DURATION}
       key={messageInfo?.key ?? undefined}
       onClose={handleClose}
