@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Matin",
+    "name": "meal",
+    "value": "breakfast"
+  },
+  {
+    "label": "Midi",
+    "name": "meal",
+    "value": "lunch"
+  },
+  {
+    "label": "Goûter",
+    "name": "meal",
+    "value": "snack"
+  },
+  {
+    "label": "Soir",
+    "name": "meal",
+    "value": "dinner"
+  }
+]

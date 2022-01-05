@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Végétarien",
+    "name": "diet",
+    "value": "vegetarian"
+  },
+  {
+    "label": "Végan",
+    "name": "diet",
+    "value": "vegan"
+  },
+  {
+    "label": "Omnivore",
+    "name": "diet",
+    "value": "omnivore"
+  }
+]

@@ -48,7 +48,7 @@ SnackbarStack.propTypes = {
   snackPack: PropTypes.arrayOf(
     PropTypes.shape({
       message: PropTypes.number,
-      key: PropTypes.number,
+      key: PropTypes.string,
     })
   ).isRequired,
   setSnackPack: PropTypes.func.isRequired,
