@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import { FormControl } from "@mui/material";
+import { FormControl, TextField } from "@mui/material";
 import SnackbarStack from "./SnackbarStack";
 import { retrieveDiets, sendDiets } from "../services/diets";
 import { retrieveUser } from "../services/auth";
@@ -67,14 +67,24 @@ const DietForm = () => {
     <>
       <form onSubmit={handleSubmit}>
         <FormControl component="fieldset" sx={{ width: "100%" }}>
-          <label style={{ marginBottom: "40px" }}>
-            Date
-            <input type="date" name="date" id="date" required />
-          </label>
+          <div style={{ textAlign: "center", marginBottom: "40px" }}>
+            <TextField
+              id="date"
+              label="Date du repas"
+              type="date"
+              sx={{
+                width: 220,
+                "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+                "& .MuiInputLabel-root": { color: "black" },
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </div>
 
           <RadioButtons sx={mealLabelStyle} data={mealsData} />
           <RadioButtons sx={labelStyle} data={dietsData} />
-
         </FormControl>
 
         <Button type="submit" variant="contained">
