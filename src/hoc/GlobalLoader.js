@@ -22,7 +22,7 @@ const GlobalLoader = ({ children }) => {
 };
 
 GlobalLoader.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default GlobalLoader;
