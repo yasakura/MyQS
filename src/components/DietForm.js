@@ -77,9 +77,8 @@ const DietForm = () => {
                 "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
                 "& .MuiInputLabel-root": { color: "black" },
               }}
-              InputLabelProps={{
-                shrink: true,
-              }}
+              InputLabelProps={{ shrink: true }}
+              required
             />
           </div>
 
