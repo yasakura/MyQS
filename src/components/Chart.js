@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { PieChart } from "react-minimal-pie-chart";
 
-const Pie = ({ diets, data, label }) => (
+const Chart = ({ diets, data, label }) => (
   <div className="chartContainer">
     {diets.length === 0 ? (
       <div className="chartEmpty">
@@ -14,7 +14,7 @@ const Pie = ({ diets, data, label }) => (
   </div>
 );
 
-Pie.propTypes = {
+Chart.propTypes = {
   diets: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -32,4 +32,4 @@ Pie.propTypes = {
   label: PropTypes.func.isRequired,
 };
 
-export default Pie;
+export default Chart;

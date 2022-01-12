@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import DietForm from "./DietForm";
-import Pie from "./Pie";
+import Chart from "./Chart";
 import { logOut, retrieveUser } from "../services/auth";
 import { retrieveDiets } from "../services/diets";
 
@@ -59,7 +59,7 @@ const MyQS = () => {
 
   return (
     <>
-      <Pie
+      <Chart
         diets={diets}
         data={getData()}
         label={({ dataEntry }) =>
