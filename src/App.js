@@ -23,13 +23,13 @@ function App() {
   useEffect(() => signIn());
 
   return (
-    <GlobalLoader>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <GlobalLoader>
         <Header />
         <div className="App">{user ? <MyQS /> : <Login />}</div>
         {user && <Footer />}
-      </ThemeProvider>
-    </GlobalLoader>
+      </GlobalLoader>
+    </ThemeProvider>
   );
 }
 
