@@ -7,6 +7,7 @@ import MyQS from "./components/MyQS";
 import Header from "./components/Header";
 import { retrieveUser, signIn } from "./services/auth";
 import GlobalLoader from "./hoc/GlobalLoader";
+import Footer from "./components/Footer";
 
 function App() {
   const { user } = retrieveUser();
@@ -36,6 +37,7 @@ function App() {
         >
           {user ? <MyQS /> : <Login />}
         </div>
+        {user && <Footer />}
       </ThemeProvider>
     </GlobalLoader>
   );

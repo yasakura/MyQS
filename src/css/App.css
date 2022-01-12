@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+footer {
+  align-items: center;
+  background-color: #007ea7;
+  color: #fff;
+  display: flex;
+  height: 56px;
+  justify-content: center;
+  margin-top: 15px;
+}
