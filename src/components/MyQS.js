@@ -80,7 +80,12 @@ const MyQS = () => {
       {user && (
         <div>
           <p>Utilisateur: {user.email}</p>
-          <Button onClick={logOut} type="submit" variant="outlined">
+          <Button
+            onClick={logOut}
+            className="logOut"
+            type="submit"
+            variant="outlined"
+          >
             Se déconnecter
           </Button>
         </div>

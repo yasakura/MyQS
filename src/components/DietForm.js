@@ -47,43 +47,23 @@ const DietForm = () => {
     );
   };
 
-  const labelStyle = {
-    border: "solid 1px black",
-    height: "100px",
-    borderRadius: "5px",
-    justifyContent: "center",
-    padding: "5px",
-    width: "100px",
-    margin: 0,
-  };
-
-  const mealLabelStyle = {
-    ...labelStyle,
-    width: "65px",
-    height: "65px",
-  };
-
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <FormControl component="fieldset" sx={{ width: "100%" }}>
-          <div style={{ textAlign: "center", marginBottom: "40px" }}>
+        <FormControl component="fieldset" className="w100">
+          <div className="dateContainer mb40">
             <TextField
               id="date"
               label="Date du repas"
               type="date"
-              sx={{
-                width: 220,
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-                "& .MuiInputLabel-root": { color: "black" },
-              }}
+              className="dateField"
               InputLabelProps={{ shrink: true }}
               required
             />
           </div>
 
-          <RadioButtons sx={mealLabelStyle} data={mealsData} />
-          <RadioButtons sx={labelStyle} data={dietsData} />
+          <RadioButtons cssClassName="mealLabel" data={mealsData} />
+          <RadioButtons cssClassName="label" data={dietsData} />
         </FormControl>
 
         <Button type="submit" variant="contained">

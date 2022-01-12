@@ -2,14 +2,10 @@ import React from "react";
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 
 const Header = () => (
-  <Box sx={{ flexGrow: 1 }}>
+  <Box>
     <AppBar position="fixed">
       <Toolbar>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1, textAlign: "center" }}
-        >
+        <Typography variant="h6" component="div" className="appBarText">
           {process.env.REACT_APP_WEBSITE_NAME}
         </Typography>
       </Toolbar>

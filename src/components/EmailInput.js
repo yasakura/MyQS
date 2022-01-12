@@ -46,13 +46,8 @@ const EmailInput = ({ isEmailOnError, setEmailOnError }) => {
         id="email"
         type="email"
         label="email"
+        className="emailField"
         placeholder="Entrez votre email"
-        sx={{
-          width: 263,
-          marginBottom: "10px",
-          "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-          "& .MuiInputLabel-root": { color: "black" },
-        }}
         required
         onBlur={handleBlur}
         onChange={handleChange}

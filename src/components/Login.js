@@ -31,14 +31,7 @@ const Login = () => {
   };
 
   return (
-    <div
-      style={{
-        height: "calc(100vh - 200px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div className="formContainer">
       <form onSubmit={handleSubmit}>
         <EmailInput
           isEmailOnError={isEmailOnError}

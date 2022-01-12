@@ -26,17 +26,7 @@ function App() {
     <GlobalLoader>
       <ThemeProvider theme={theme}>
         <Header />
-        <div
-          className="App"
-          style={{
-            margin: "0 auto",
-            marginTop: "70px",
-            maxWidth: "375px",
-            padding: "0 10px",
-          }}
-        >
-          {user ? <MyQS /> : <Login />}
-        </div>
+        <div className="App">{user ? <MyQS /> : <Login />}</div>
         {user && <Footer />}
       </ThemeProvider>
     </GlobalLoader>

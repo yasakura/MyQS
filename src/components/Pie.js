@@ -3,16 +3,9 @@ import PropTypes from "prop-types";
 import { PieChart } from "react-minimal-pie-chart";
 
 const Pie = ({ diets, data, label }) => (
-  <div style={{ width: "70%", height: "300px", margin: "0 auto 30px" }}>
+  <div className="chartContainer">
     {diets.length === 0 ? (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
+      <div className="chartEmpty">
         <p>Remplis le formulaire 😉</p>
       </div>
     ) : (

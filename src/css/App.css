@@ -1,48 +1,142 @@
 .App {
-  text-align: center;
+    margin: 70px auto 0;
+    max-width: 375px;
+    padding: 0 10px;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.appBarText {
+    text-align: center;
+    width: 100%;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.mb40 {
+    margin-bottom: 40px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.chartContainer {
+    height: 300px;
+    margin: 0 auto 30px;
+    width: 70%;
+}
+
+.chartEmpty {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+.formContainer {
+    height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dateContainer {
+    text-align: center;
+}
+
+.emailField {
+    margin-bottom: 10px;
+    width: 263px;
+}
+
+.dateField {
+    width: 220px;
+}
+
+.emailField .MuiOutlinedInput-notchedOutline,
+.dateField .MuiOutlinedInput-notchedOutline {
+    border-color: #000;
+}
+
+.emailField .MuiInputLabel-root,
+.dateField .MuiInputLabel-root {
+    color: #000;
+}
+
+.radioGroup {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.radioGroup .label,
+.radioGroup .mealLabel {
+    margin: 0;
+}
+
+.label, .mealLabel {
+    border-radius: 5px;
+    border: solid 1px black;
+    justify-content: center;
+    padding: 5px;
+}
+
+.label {
+    height: 100px;
+    width: 100px;
+}
+
+.mealLabel {
+    height: 65px;
+    width: 65px;
+}
+
+.MuiButton-root.logOut {
+    margin-bottom: 10px;
 }
 
 footer {
-  align-items: center;
-  background-color: #007ea7;
-  color: #fff;
-  display: flex;
-  height: 56px;
-  justify-content: center;
-  margin-top: 15px;
+    align-items: center;
+    background-color: #007ea7;
+    color: #fff;
+    display: flex;
+    height: 56px;
+    justify-content: center;
+    margin-top: 15px;
 }
