@@ -77,7 +77,7 @@
     text-align: center;
 }
 
-.emailField {
+.MuiFormControl-root .emailField {
     margin-bottom: 10px;
     width: 263px;
 }
