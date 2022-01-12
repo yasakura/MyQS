@@ -1,10 +1,11 @@
 import "../css/loader.css";
 import React from "react";
 import Box from "@mui/material/Box";
+import Header from "./Header";
 
 const Loading = () => (
   <div className="App">
-    <header>{process.env.REACT_APP_WEBSITE_NAME}</header>
+    <Header />
     <div className="loadingContainer">
       <div className="loading">
         <Box component="p">Patiente pendant que la magie opère ✨</Box>
