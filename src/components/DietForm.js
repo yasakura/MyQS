@@ -8,29 +8,12 @@ import uniqueKey from "../utils/uniqueKey";
 import RadioButtons from "./RadioButtons";
 import mealsData from "../data/meals.json";
 import dietsData from "../data/diets.json";
+import composeUserDiet from "../utils/diets";
 
 const DietForm = () => {
   const [snackPack, setSnackPack] = useState([]);
   const { user } = retrieveUser();
   const { diets } = retrieveDiets();
-
-  const composeUserDiet = (date, diet, meal) => {
-    const rawDiets = diets;
-    const dietEntry = { date, diet, meal };
-    const dietFilter = (item) =>
-      dietEntry.date === item.date && dietEntry.meal === item.meal;
-    const currentDietInSavedDiet = rawDiets.filter(dietFilter);
-    const currentDietFirstIndexInSavedDiet = rawDiets.findIndex(dietFilter);
-    const isCurrentDietInSavedDiet = currentDietInSavedDiet.length > 0;
-    if (isCurrentDietInSavedDiet) {
-      rawDiets.splice(
-        currentDietFirstIndexInSavedDiet,
-        currentDietInSavedDiet.length
-      );
-    }
-
-    return [...rawDiets, dietEntry];
-  };
 
   const handleSuccessMessage = () => {
     setSnackPack((prev) => [...prev, { key: uniqueKey() }]);
@@ -41,8 +24,9 @@ const DietForm = () => {
     const date = event.target.date.value;
     const diet = event.target.diet.value;
     const meal = event.target.meal.value;
+    const userDiet = { date, diet, meal };
 
-    sendDiets(user, composeUserDiet(date, diet, meal)).then(
+    sendDiets(user, composeUserDiet(userDiet, diets)).then(
       handleSuccessMessage
     );
   };
